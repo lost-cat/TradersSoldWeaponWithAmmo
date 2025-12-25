@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net480</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
+
+		<!-- Modify [RootNamespace], [AssemblyName], [OutputPath], [VersionPrefix] -->
+		<RootNamespace>LostCat</RootNamespace>
+		<AssemblyName>TradersSoldWeaponWithAmmo</AssemblyName>
+		<OutputPath>../1.6/Assemblies</OutputPath>
+		<VersionPrefix>0.1.0.0</VersionPrefix>
+
+		<!-- Do not generate pdb file -->
+		<DebugType>none</DebugType>
+
+		<DebugSymbols>False</DebugSymbols>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+		<RimWorldPath Condition="'$(RimWorldPath)' == '' AND '$(OS)' == 'Windows_NT'">../../../RimWorldWin64_Data/Managed</RimWorldPath>
+		<RimWorldPath Condition="'$(RimWorldPath)' == '' AND '$(OS)' != 'Windows_NT'">../../../RimWorldLinux_Data/Managed</RimWorldPath>
+
+		<!-- Steam Workshop base for RimWorld (294100). Relative to this .csproj location -->
+		<SteamWorkshopPath Condition="'$(SteamWorkshopPath)' == ''">../../../../../../steamapps/workshop/content/294100</SteamWorkshopPath>
+		<!-- Default Combat Extended Workshop ID; override with /p:CEWorkshopId=... if needed -->
+		<CEWorkshopId Condition="'$(CEWorkshopId)' == ''">2890901044</CEWorkshopId>
+
+		<!-- Allow explicit override to a custom CE dll path via /p:CombatExtendedDll=... -->
+		<CombatExtendedDll Condition="'$(CombatExtendedDll)' == '' and Exists('$(SteamWorkshopPath)/$(CEWorkshopId)/Assemblies/CombatExtended.dll')">$(SteamWorkshopPath)/$(CEWorkshopId)/Assemblies/CombatExtended.dll</CombatExtendedDll>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Mod -->
+		<Compile Include="../Source/*" />
+
+		<!-- Rimworld -->
+		<Reference Include="$(RimWorldPath)/*.dll">
+			<Private>False</Private>
+		</Reference>
+
+		<!-- *Uncomment for Harmony* -->
+		<Reference Include="$(SteamWorkshopPath)/2009463077/Current/Assemblies/0Harmony.dll">
+			<Private>False</Private>
+		</Reference>
+
+		<!-- Combat Extended (optional) -->
+		<Reference Include="CombatExtended" Condition="Exists('$(CombatExtendedDll)')">
+			<HintPath>$(CombatExtendedDll)</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+</Project>

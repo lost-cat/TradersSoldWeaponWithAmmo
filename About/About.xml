@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<packageId>LostCat.TradersSoldWeaponWithAmmo</packageId>
+	<name>Traders Sold Weapon With Corresponding Ammo</name>
+	<author>LostCat</author>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+
+	<modDependencies>
+		<li>
+			<packageId>CETeam.CombatExtended</packageId>
+			<displayName>Combat Extended</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2890901044</steamWorkshopUrl>
+			<downloadUrl>https://github.com/CombatExtended-Continued/CombatExtended</downloadUrl>
+		</li>
+	</modDependencies>
+
+	<incompatibleWith>
+	</incompatibleWith>
+
+	<description>
+		当商人或据点出售 Combat Extended 武器时，自动在其货表中加入匹配弹药，避免“有枪无弹”。
+		使用说明：请在模组加载顺序中将本模组放在 Combat Extended 之后；效果对新生成或刷新后的货表生效。
+		English: Adds matching ammo to trader/settlement stock whenever Combat Extended weapons appear. Load this mod after Combat Extended.
+	</description>
+	<loadAfter>
+		<li>CETeam.CombatExtended</li>
+	</loadAfter>
+</ModMetaData>
