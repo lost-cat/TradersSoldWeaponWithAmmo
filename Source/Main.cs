@@ -27,10 +27,10 @@ namespace LostCat
     {
         static Start()
         {
-            Log.Message("Mod template loaded successfully!");
 
             Harmony harmony = new Harmony("LostCat.TradersSoldWeaponWithAmmo");
             harmony.PatchAll( Assembly.GetExecutingAssembly() );
+            Log.Message("TradersSoldWeaponWithAmmo: Harmony patches applied.");
         }
     }
 

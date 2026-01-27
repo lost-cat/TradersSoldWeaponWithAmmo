@@ -6,6 +6,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 using CombatExtended;
+using RimWorld.Planet;
 
 namespace LostCat
 {
@@ -113,4 +114,22 @@ namespace LostCat
             __result = list;
         }
     }
+
+    // Allow all trader kinds to treat Combat Extended ammo as tradable so settlements actually sell it.
+    [HarmonyPatch(typeof(TraderKindDef), nameof(TraderKindDef.WillTrade))]
+    public static class TraderKindWillTradeAmmoPatch
+    {
+        static bool Prefix(ThingDef td, ref bool __result)
+        {
+            if (td is AmmoDef)
+            {
+                __result = true;
+                return false; // Skip original to force allowance for ammo.
+            }
+
+            return true;
+        }
+    }
+
 }
+
